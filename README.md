@@ -1,21 +1,8 @@
 # Bank
 
-**TODO: Add description**
+Just a test to retrieve GenServer state after termination.
 
-## Installation
+When call `Bank#withdraw/1` with an amount greater than Bank (server) balance, 
+raise an error, invoke `Bank#terminate` to save the balance in the cache process (server).
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `bank` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:bank, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/bank](https://hexdocs.pm/bank).
-
+When the `Bank.Supervisor` restart the `Bank` process, the `Bank#init/1` will use the cache process to restore the state from the crashed `Bank`
